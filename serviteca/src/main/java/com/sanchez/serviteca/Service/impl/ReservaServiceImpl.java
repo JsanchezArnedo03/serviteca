@@ -116,4 +116,31 @@ public class ReservaServiceImpl implements ReservaService {
         }
         return response;
     }
+
+    @Override
+    public ReservaDTO findReservaByFiltro(String filtro) {
+        Optional<Reserva> found = Optional.ofNullable(reservaRepository.findReservaByFiltro(filtro));
+        ReservaDTO dto = null;
+        if (found.isPresent()) {
+            dto = new ReservaDTO();
+            dto.setIdReserva(found.get().getIdReserva());
+            //ASIGNACION DEL CLIENTE PARA MOSTRARLO
+            dto.setCliente(Optional.ofNullable(found.get().getCliente())
+                    .map(ClienteDTO::toDto)
+                    .orElse(null));
+
+            //ASIGNACION DEL SERVICIO PARA MOSTRARLO
+            dto.setServicio(Optional.ofNullable(found.get().getServicio())
+                    .map(ServicioDTO::toDto)
+                    .orElse(null));
+
+            //ASIGNACION DEL ESTADO EN EL QUE SE ENCUENTRA LA RESERVA
+            dto.setEstadoReservacion(Optional.ofNullable(found.get().getEstadoReservacion())
+                    .map(EstadosReservaDTO::toDto)
+                    .orElse(null));
+
+            dto.setFechaReservar(found.get().getFechaReservar());
+        }
+        return dto;
+    }
 }

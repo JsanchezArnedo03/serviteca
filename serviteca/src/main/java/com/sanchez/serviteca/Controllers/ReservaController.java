@@ -39,4 +39,9 @@ public class ReservaController {
         ResponseDTO dto = reservaService.updateStatus(id, idStatus);
         return ResponseEntity.ok(dto);
     }
+
+    @GetMapping("/getByCliente")
+    ReservaDTO getByCliente(@RequestParam String numeroDocumento){
+        return reservaService.findReservaByFiltro(numeroDocumento);
+    }
 }

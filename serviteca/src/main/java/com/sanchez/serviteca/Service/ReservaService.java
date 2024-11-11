@@ -14,4 +14,6 @@ public interface ReservaService {
     ReservaDTO findById(Integer id);
 
     ResponseDTO updateStatus(Integer id, Integer idStatus);
+
+    ReservaDTO findReservaByFiltro(String filtro);
 }
