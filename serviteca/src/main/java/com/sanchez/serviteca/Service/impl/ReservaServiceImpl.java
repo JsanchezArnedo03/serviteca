@@ -111,6 +111,7 @@ public class ReservaServiceImpl implements ReservaService {
         if (reserva.isPresent()) {
             Optional<EstadosReserva> estadoOptional = estadosReservaRepository.findById(idStatus);
             estadoOptional.ifPresent(estado -> reserva.get().setEstadoReservacion(estado));
+            reservaRepository.save(reserva.get());
             response.setError(false);
             response.setMensaje("estado actualizado con exito");
         }

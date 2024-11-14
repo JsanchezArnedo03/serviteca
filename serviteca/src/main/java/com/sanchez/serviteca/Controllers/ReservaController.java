@@ -32,7 +32,7 @@ public class ReservaController {
         return ResponseEntity.ok(dto);
     }
 
-    @PostMapping("/update-status")
+    @PutMapping("/update-status")
     ResponseEntity<ResponseDTO> update_status(
             @RequestParam(value = "id") Integer id,
             @RequestParam(value = "idStatus") Integer idStatus) {

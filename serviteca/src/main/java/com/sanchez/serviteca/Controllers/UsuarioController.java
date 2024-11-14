@@ -1,6 +1,7 @@
 package com.sanchez.serviteca.Controllers;
 
 import com.sanchez.serviteca.DTO.ResponseDTO;
+import com.sanchez.serviteca.DTO.UsuarioDTO;
 import com.sanchez.serviteca.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,12 @@ public class UsuarioController {
     ResponseEntity<ResponseDTO> login(@RequestParam(value = "username") String username,
                                       @RequestParam(value = "password") String password) {
         ResponseDTO dto = usuarioService.login(username, password).getBody();
+        return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/create")
+    ResponseEntity<ResponseDTO> create(UsuarioDTO usuarioDTO) {
+        ResponseDTO dto = usuarioService.createUser(usuarioDTO).getBody();
         return ResponseEntity.ok(dto);
     }
 }
